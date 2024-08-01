@@ -1,13 +1,12 @@
-import { ScrollArea } from '@/components/ui/scroll-area'
-import React from 'react'
+import { ScrollArea } from '@/components/ui/scroll-area';
 
-interface LeftPanelProps {
+interface IWatchListProps {
     scripts: string[]
 }
 
-const LeftPanel = ({
+export const WatchList = ({
     scripts
-}: LeftPanelProps) => {
+}: IWatchListProps) => {
     return (
         <ScrollArea className="h-[500px]">
             <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
@@ -21,5 +20,3 @@ const LeftPanel = ({
         </ScrollArea>
     )
 }
-
-export default LeftPanel

@@ -1,30 +1,23 @@
 "use client";
 
 import React, { useState } from 'react';
-
-
-import { SearchScript } from '@/components/organisms/search/searchScript';
-import LeftPanel from '@/components/organisms/leftPanel';
-import RightPanel from '@/components/organisms/rightPanel';
+import OptionChain from '@/components/organisms/optionChain';
+import { SearchScript, WatchList } from '@/components/organisms/scripts';
+import ContentLayout from '@/components/atoms/content/content-layout';
 
 const Dashboard = () => {
     const [scripts, setScripts] = useState<string[]>([]);
-    const handleScriptAdd = (item: string) => {
+    const handleOnScriptAdded = (item: string) => {
         setScripts((prevState: string[]) => [...prevState, item]);
     }
 
     return (
-        <section className="container items-center ">
-            <SearchScript onScriptAdd={handleScriptAdd} />
-            <div className="grid grid-cols-12">
-                <aside className="h-screen self-start sticky top-0 col-span-3 border-x">
-                    <LeftPanel scripts={scripts} />
-                </aside>
-                <main className="col-span-9 border-x">
-                    <RightPanel />
-                </main>
-            </div>
-        </section>
+        <ContentLayout pageMeta={{
+            title: "Dashboard",
+            description: "Manage your Orders"
+        }}>
+            <OptionChain />
+        </ContentLayout>
     )
 }
 

@@ -4,11 +4,10 @@ import React, { useState } from 'react'
 import { siteConfig } from '@/config/site'
 import MainNav from './mainNav'
 import Link from 'next/link'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Icons } from '../icons'
-import ThemeToggle from '../theme/themeToggle'
-import LoginModal from '../modal/login'
+import { Button } from '@/components/ui/button'
 import UserNav from './userNav';
+import LoginOtp from '../modal/login-otp';
+import ThemeToggle from '../theme/themeToggle';
 
 const SiteHeader = () => {
   const [open, setOpen] = useState(false);
@@ -51,7 +50,12 @@ const SiteHeader = () => {
             <Button asChild>
               <Link href="#" onClick={() => setOpen(!open)}>Login</Link>
             </Button>
-            <LoginModal
+            {/* <LoginModal
+              isOpen={open}
+              onClose={() => setOpen(false)}
+              loading={open ? false : true}
+            /> */}
+            <LoginOtp
               isOpen={open}
               onClose={() => setOpen(false)}
               loading={open ? false : true}

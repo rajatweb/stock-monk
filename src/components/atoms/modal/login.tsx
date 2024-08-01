@@ -30,13 +30,13 @@ const formSchema = z.object({
     }),
 })
 
-interface LoginModalProps {
+interface LoginProps {
     isOpen: boolean;
     onClose: () => void;
     loading: boolean;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({
+const Login: React.FC<LoginProps> = ({
     isOpen,
     onClose,
     loading
@@ -114,4 +114,4 @@ const LoginModal: React.FC<LoginModalProps> = ({
     )
 }
 
-export default LoginModal
+export default Login

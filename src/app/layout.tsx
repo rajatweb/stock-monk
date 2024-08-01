@@ -6,6 +6,7 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import ThemeProvider from "@/components/atoms/theme/themeProvider";
 import SiteHeader from "@/components/atoms/header/siteHeader";
+import StoreProvider from "@/store/store-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,14 +42,16 @@ export default function RootLayout({
       <body className={cn(
         "min-h-screen bg-background antialiased"
       )}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="relative flex min-h-screen flex-col">
-            <SiteHeader />
-            <div className="flex-1">
-              {children}
+        <StoreProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div className="relative flex min-h-screen flex-col">
+              <SiteHeader />
+              <div className="flex-1">
+                {children}
+              </div>
             </div>
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );

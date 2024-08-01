@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import * as crypto from 'crypto';
+import { IUser } from "@/types/user";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -11,7 +12,7 @@ export const getHash = (input: string) =>
 
 interface ISetAppLocalStorageProps {
   name: string;
-  payload: any;
+  payload: IUser;
 }
 
 export const setAppLocalStorage = ({
@@ -19,10 +20,7 @@ export const setAppLocalStorage = ({
   payload
 }: ISetAppLocalStorageProps) => {
   if (typeof window !== 'undefined') {
-    localStorage.setItem(name, JSON.stringify({
-      token: payload.token,
-      userName: payload.userName,
-    }));
+    localStorage.setItem(name, JSON.stringify(payload));
   } else {
     return;
   }

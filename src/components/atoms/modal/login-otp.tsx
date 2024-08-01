@@ -20,6 +20,8 @@ import {
 } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
 import Modal from '@/components/ui/modal';
+import { useLoginWithOTPMutation } from '@/store/api/user-api';
+import { setAppLocalStorage } from '@/lib/utils';
 
 
 const FormSchema = z.object({
@@ -39,6 +41,7 @@ const LoginOTP: React.FC<ILoginOTPProps> = ({
     onClose,
     loading
 }) => {
+    const [loginWithOtp] = useLoginWithOTPMutation();
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -47,9 +50,18 @@ const LoginOTP: React.FC<ILoginOTPProps> = ({
     })
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
-        console.log("🚀 ~ onSubmit ~ data:", data)
+        console.log("🚀 ~ onSubmit ~ data:", data);
+        loginWithOtp(data)
+            .unwrap()
+            .then(res => {
+                setAppLocalStorage({ name: "userInfo", payload: res })
+                console.log("🚀 ~ onSubmit ~ res:", res);
+            })
+            .catch(e => {
+                console.log("🚀 ~ onSubmit ~ e:", e);
+            })
     }
-    
+
     return (
         <Modal
             title="Login"

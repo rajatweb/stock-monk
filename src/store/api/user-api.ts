@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getHash } from "@/lib/utils";
+import { ILoginWithOTPRequest, ILoginWithOTPResponse } from "@/types/api/login";
 
 const baseUrl = `${process.env.NEXT_PUBLIC_APP_API_URL}/NorenWClientTP/`;
 
@@ -14,12 +15,12 @@ const config = (opt: string) => ({
     source: 'API',
 })
 
-const userApi = createApi({
+export const userApi = createApi({
     reducerPath: 'user',
     baseQuery: fetchBaseQuery({ baseUrl }),
     tagTypes: ["users"],
     endpoints: (builder) => ({
-        loginWithOTP: builder.mutation<any, any>({
+        loginWithOTP: builder.mutation<ILoginWithOTPResponse, ILoginWithOTPRequest>({
             query: (data) => {
                 const sendData = config(data.pin)
                 return {
